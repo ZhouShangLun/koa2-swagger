@@ -6,7 +6,7 @@
   "license": "WTFPL",
   "scripts": {
     "start": "gulp nodemon",
-    "dev": "gulp",
+    "dev": "gulp nodemon",
     "build": "babel src -d dist",
     "production": "node dist/app.js",
     "test": "jest",
