@@ -5,7 +5,7 @@ const router = new SwaggerRouter();
 
 // swagger docs avaliable at http://localhost:3000/swagger-html
 router.swagger({
-    title: '一个demo',
+    title: '一个demo系统',
     description: 'API DOC',
     version: '1.0.0'
 });

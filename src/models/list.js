@@ -40,13 +40,13 @@ class ListModel {
    * @param kewword  关键字搜索
    * @returns {Promise.<*>}
    */
-  static async getTodoList(kewword, status) {
+  static async getTodoList(keyword, status) {
     const op=Sequelize.Op
     const todoList = await List.findAll({
       where: {
         status,
         content: {
-          [op.like]: '%'+kewword+'%'
+          [op.like]: '%'+keyword+'%'
       }
       },
       attributes: ["id", "content", "status"],
