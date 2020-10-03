@@ -27,7 +27,9 @@ app
   })
   .use(ErrorRoutesCatch())
   .use(KoaStatic('assets', path.resolve(__dirname, '../assets'))) // 这里的静态资源
-  .use(jwt({ secret: SystemConfig.JWT_Sign }).unless({path: [/^\/user\/login/, /^\/user\/register/,/^\/swagger/]})) //swagger作为路由必须也排除在外
+  .use(jwt({ secret: SystemConfig.JWT_Sign }).unless({
+    path: [/^\/user\/login/, /^\/user\/register/, /^\/swagger/, /^\/public/]
+  }))// swagger作为路由必须也排除在外
   .use(KoaBody({
     multipart: true,
     parsedMethods: ['POST', 'PUT', 'PATCH', 'GET', 'HEAD', 'DELETE'], // parse GET, HEAD, DELETE requests
@@ -37,7 +39,7 @@ app
     jsonLimit: '10mb',
     formLimit: '10mb',
     textLimit: '10mb'
-  })) 
+  }))
   .use(MainRoutes.routes())
   .use(MainRoutes.allowedMethods())
   .use(ErrorRoutes())

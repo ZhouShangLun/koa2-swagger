@@ -1,38 +1,38 @@
-import Sequelize from "sequelize";
-import sequelize from "../lib/sequelize";
+import Sequelize from 'sequelize'
+import sequelize from '../lib/sequelize'
 
 // 1.创建 model
 const List = sequelize.define(
-  "list",
+  'list',
   {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV1,
-      primaryKey: true,
+      primaryKey: true
     },
     user_id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV1,
-      allowNull: false,
+      allowNull: false
     },
     content: {
       type: Sequelize.STRING(255),
-      field: "content",
+      field: 'content'
     },
     status: {
       type: Sequelize.INTEGER,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   },
   {
     // true 表名称和 model 相同: list
     // false 创建表名称会是复数: lists
-    freezeTableName: true,
+    freezeTableName: true
   }
-);
+)
 
 // 2.创建表
-const list = List.sync({ force: false });
+List.sync({ force: false })
 
 class ListModel {
   /**
@@ -40,35 +40,31 @@ class ListModel {
    * @param kewword  关键字搜索
    * @returns {Promise.<*>}
    */
-  static async getTodoList(keyword, status) {
-    const op=Sequelize.Op
+  static async getTodoList (keyword, status) {
+    const op = Sequelize.Op
     const todoList = await List.findAll({
       where: {
         status,
         content: {
-          [op.like]: '%'+keyword+'%'
-      }
+          [op.like]: '%' + keyword + '%'
+        }
       },
-      attributes: ["id", "content", "status"],
+      attributes: ['id', 'content', 'status'],
       limit: 10,
       offset: 0,
       order: [
         ['id', 'desc']
       ]
-    });
-    const totalCount=await List.findAll({
+    })
+    const totalCount = await List.count({
       where: {
         status,
         content: {
-          [op.like]: '%'+kewword+'%'
+          [op.like]: '%' + keyword + '%'
+        }
       }
-      },
-      attributes: ["id", "content", "status"],
-      order: [
-        ['id', 'desc']
-      ]
-    });
-    return {items:todoList,totalCount:totalCount.length};
+    })
+    return { items: todoList, totalCount: totalCount }
   }
 
   /**
@@ -76,13 +72,13 @@ class ListModel {
    * @param data
    * @returns {Promise.<boolean>}
    */
-  static async createTodoList(data) {
+  static async createTodoList (data) {
     await List.create({
       user_id: data.user_id,
       content: data.content,
-      status: data.status,
-    });
-    return true;
+      status: data.status
+    })
+    return true
   }
 
   /**
@@ -90,13 +86,13 @@ class ListModel {
    * @param id listID
    * @returns {Promise.<boolean>}
    */
-  static async destroyTodoList(id) {
+  static async destroyTodoList (id) {
     await List.destroy({
       where: {
-        id,
-      },
-    });
-    return true;
+        id
+      }
+    })
+    return true
   }
 
   /**
@@ -105,20 +101,20 @@ class ListModel {
    * @param status  事项的状态
    * @returns {Promise.<boolean>}
    */
-  static async updateTodoList(id, status) {
+  static async updateTodoList (id, status) {
     await List.update(
       {
-        status,
+        status
       },
       {
         where: {
-          id,
+          id
         },
-        fields: ["status"],
+        fields: ['status']
       }
-    );
-    return true;
+    )
+    return true
   }
 }
 
-module.exports = ListModel;
+module.exports = ListModel

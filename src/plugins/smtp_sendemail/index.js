@@ -1,8 +1,7 @@
 import nodemailer from 'nodemailer'
 import { SendEmail } from '../../config'
 
-
- /**
+/**
    * 发送Email
    * @param receivers 目标邮箱，可以用英文逗号分隔多个。
    * @param subject 邮件标题
@@ -10,7 +9,7 @@ import { SendEmail } from '../../config'
    * @param html HTML版本的邮件内容
    * @returns
    */
-export const sendemail =async (receivers, subject, text, html) => {
+export const sendemail = async (receivers, subject, text, html) => {
   return new Promise(function (resolve) {
     const transporter = nodemailer.createTransport('smtp://' + SendEmail.username + ':' + SendEmail.password + '@' + SendEmail.service)
 
