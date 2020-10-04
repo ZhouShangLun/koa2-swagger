@@ -11,7 +11,7 @@ export const System = {
   System_country: 'zh-cn', // 所在国家的国家代码
   System_plugin_path: path.join(__dirname, './plugins'), // 插件路径
   JWT_Sign: 'JWT_Sign', // 生产环境务必随机设置一个值
-  db_type: 'postgres' // 数据库类型
+  db_type: 'postgres' // 数据库类型 mysql mariadb sqlite  postgres  mssql
 }
 
 export const DB = {
