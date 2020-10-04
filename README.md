@@ -32,11 +32,18 @@ npm run dev
 同时在app.js里面也声明了 path: [/^\/user\/login/, /^\/user\/register/, /^\/swagger/, /^\/public/]的路由是不受验证(允许匿名请求)
 
 **第一步**先使用  /public/initData 的接口初始化数据，这时数据库就产生了登录的user和列表list的数据
+
 **第二步**接下来 在注册接口 /user/register 或者 登录接口 /user/login 请求返回token
+
+
 ![Image text](https://raw.githubusercontent.com/ZhouShangLun/koa2-swagger/main/images/login.jpg)
 
+
 **第三步**最后将token授权 打开Authorize按钮，记得前面携带 Bearer  然后点击Authorize。
+
+
 ![Image text](https://raw.githubusercontent.com/ZhouShangLun/koa2-swagger/main/images/authorization.jpg)
+
 
 **最后** 在授权之后就可以对list列表增删查改了
 
@@ -49,10 +56,10 @@ npm run dev
 ```javascript
 // list.js
 
-import ListModel from 'models/user'
-import { request, summary, query, path, body, tags } from 'koa-swagger-decorator'
+import ListModel from 'models/list'
+import { request, summary, description, query, path, body, tags } from 'koa-swagger-decorator'
 
-const tag = tags(['test'])
+const tag = tags(['list'])
 
 
 const getListSchema = {
@@ -87,7 +94,4 @@ export default class ListController {
 
 }
 ```
-
-
-
 
