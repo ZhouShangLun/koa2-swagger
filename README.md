@@ -4,14 +4,19 @@
 
 包括对应的sequelize对数据库的直接操作
 
+一开始看到开源的[koa-swagger-decorator](https://github.com/Cody2333/koa-swagger-decorator/blob/master/CONTRIBUTING.md)这个项目的时候眼前一亮，
+比起手动用postman调试，在线swagger调试要简单方便的多。所以就想着写一个完整一点的项目供自己和大家学习。
+
 
 ## 如何使用
 
 ### 关于sequelize和数据库
 
 这里使用的是关系型数据库的ORM sequelize 
-支持多种数据库，请先在 config.js中修改对应的db_type 例如：mysql mariadb sqlite  postgres  mssql
-之后运行对应的  npm install mysql 或 npm install postgres 之类……
+
+支持多种数据库，请先在 config.js中修改对应的数据库连接设置，例如 db_type：mysql mariadb sqlite  postgres  mssql
+
+我这里使用的是postgres，如果修改了数据库类型之后运行对应的  npm install mysql 或 npm install postgres 之类……
 
 在配置好数据库之后 将会自动为数据库创建对应的model
 
